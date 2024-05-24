@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks for ToDo List</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+        .create-button {
+            font-size: 15px;
+            padding: 10px 10px;
+            margin-left: 365px;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <a th:href="@{{user_id}(user_id=${user.id})/tasks/}" class="btn">Create New ToDo List</a>
+
+    <h1 th:text="'All ToDo Lists of ' + ${user.name}"></h1>
+
+    <a th:href="@{/tasks/create/todos/{todo_id}(todo_id=${todo_id})}" class="btn create-button">Create Task</a>
+
+    <h2>Tasks:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th class="number-column">No.</th>
+            <th class="id-column">Id</th>
+            <th class="name-column">Name</th>
+            <th class="priority-column">Priority</th>
+            <th class="state-column">State</th>
+            <th class="operations-column">Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="task, iterStat : ${tasks}">
+            <td th:text="${iterStat.count}"></td>
+            <td th:text="${task.id}"></td>
+            <td th:text="${task.name}"></td>
+            <td th:text="${task.priority}"></td>
+            <td th:text="${task.state.name}"></td>
+            <td>
+                <a class="edit-button"
+                   th:href="@{/tasks/{task_id}/update/todos/{todo_id}(task_id=${task.id}, todo_id=${task.todo.id})}">Edit</a>
+                <a class="remove-button"
+                   th:href="@{/tasks/{task_id}/delete/todos/{todo_id}(task_id=${task.id}, todo_id=${task.todo.id})}">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

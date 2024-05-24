@@ -1,0 +1,96 @@
+.green-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    transform: translateY(1px);
+}
+
+.green-btn:hover {
+    background-color: #3e8e41
+}
+
+.green-btn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(1px);
+}
+
+.red-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #f44336;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    transform: translateY(1px);
+}
+
+.red-btn:hover {
+    background-color: #d32f2f;
+}
+
+.red-btn:active {
+    background-color: #d32f2f;
+    box-shadow: 0 2px #666;
+    transform: translateY(1px);
+}
+
+.button-container button,
+.button-container a {
+    margin-right: 10px;
+    padding: 10px 20px;
+}
+
+.create-button {
+    background-color: deepskyblue;
+    color: white;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.create-button:hover {
+    background-color: lightblue;
+}
+
+.reset-button {
+    background-color: floralwhite;
+    border-radius: 5px;
+    border: black;
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background-color: lightgray;
+}
+
+.update-button {
+    background-color: deepskyblue;
+    color: white;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.update-button:hover {
+    background-color: lightblue;
+}

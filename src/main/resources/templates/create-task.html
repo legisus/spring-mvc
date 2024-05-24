@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Task</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/fields.css">
+    <link rel="stylesheet" type="text/css" href="/css/links.css">
+
+</head>
+<body>
+<h1>Create New Task</h1>
+
+<form th:action="@{/tasks/create/todos/{todo_id}(todo_id=${todo_id})}" method="post" th:object="${taskDto}">
+    <label for="title">Name:</label>
+    <input type="text" id="title" name="name" th:value="*{name}" required><br>
+
+    <label for="priority">Priority:</label>
+    <select id="priority" name="priority" th:field="*{priority}" required>
+        <option value="" selected hidden>Please select priority</option>
+        <option th:each="priority : ${priorities}"
+                th:value="${priority}" th:text="${priority}"></option>
+    </select><br>
+
+    <div class="button-container">
+        <button type="submit" class="create-button">Create</button>
+        <button type="reset" class="reset-button">Clear</button>
+        <a th:href="@{/todos/{todo_id}/(todo_id=${todo_id})}" class="task-list-link">Go to Task List</a>
+    </div>
+</form>
+</body>
+</html>

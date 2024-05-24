@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/tables.css">
+    <title>List of Users</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .create-button {
+            float: right;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-right: 20px;
+            margin-bottom: 30px;
+            clear: both;
+        }
+        .edit-link, .remove-link {
+            text-decoration: underline;
+            margin-right: 10px;
+        }
+        .remove-link:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>List of Users</h1>
+<a class="green-btn" href="/todos">ToDos list</a>
+<a class="green-btn" href="/users/create">Create User</a>
+<br><br>
+<table class="container">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, iterStat : ${users}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <a class="green-btn" th:href="@{/users/{id}/update(id=${user.id})}">Edit</a>
+            <a href="#" th:href="@{/todos/create/users/{userId}(userId=${user.id})}" class="btn green-btn">Create New ToDo</a>
+            <a class="red-btn" th:href="@{/users/{id}/delete(id=${user.id})}">Remove</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

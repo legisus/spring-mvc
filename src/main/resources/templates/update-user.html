@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .update-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .clear-btn {
+            background-color: #fff;
+            color: #007bff;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit User</h1>
+    <a th:href="@{/home}">ToDos list</a>
+<!--    th:href="@{'/tutorials/' + ${tutorial.id} + '/published/false'}-->
+<!--    <form action="/users/${user.id}/update" method="post">-->
+    <form th:action="@{/users/{id}/update(id=${user.id})}" method="post">
+       <!--<form th:action="@{'/users/' + ${user.id} + '/update'}" method="post"> -->
+            <label for="id">ID:</label>
+        <input type="text" id="id" name="id" th:value="${user.id}" readonly><br>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" required><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" required><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${user.email}" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:value="${user.password}" required><br>
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option th:each="role : ${roles}" th:value="${role.id}" th:selected="${role.id == user.role.id}" th:text="${role.name}"></option>
+        </select><br>
+        <button type="submit" class="update-btn">Update</button>
+        <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+    </form>
+</div>
+
+<script>
+    function clearForm() {
+        document.getElementById("firstName").value = "";
+        document.getElementById("lastName").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("role").selectedIndex = 0;
+    }
+</script>
+</body>
+</html>

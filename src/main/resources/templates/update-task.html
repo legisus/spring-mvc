@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Task</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/fields.css">
+    <link rel="stylesheet" type="text/css" href="/css/links.css">
+
+</head>
+<body>
+<h1>Update Task</h1>
+<form th:action="@{/{task_id}/update/todos/{todo_id}}" method="post" th:object="${taskDto}">
+    <label for="taskId">Id:</label>
+    <input type="text" id="taskId" name="taskId" th:value="${task_id}" th:readonly="true"/><br/>
+
+    <label for="taskName">Name:</label>
+    <input type="text" id="taskName" name="taskName"/><br/>
+
+    <label for="priority">Priority:</label>
+    <select id="priority" name="priority" th:field="*{task.priority}" required>
+        <option value="" selected hidden>Please select priority</option>
+        <option th:each="priority : ${priorities}"
+                th:value="${priority}" th:text="${priority}"></option>
+    </select><br>
+
+    <!-- Need to implement Status logic -->
+
+    <label for="status">Status:</label>
+    <select id="status" name="status">
+        <option th:value="New">New</option>
+    </select><br/>
+
+    <div class="button-container">
+        <button type="submit" class="update-button">Update</button>
+        <button type="reset" class="reset-button">Clear</button>
+        <a th:href="@{/todos/{todo_id}/(todo_id=${todo.id})}" class="task-list-link">Go to Task List</a>
+    </div>
+</form>
+</body>
+</html>

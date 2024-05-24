@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New ToDo List</title>
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/tables.css">
+    <link rel="stylesheet" type="text/css" href="/css/tooltip.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-selector.css">
+</head>
+<body>
+<div class="container">
+    <h1>Create New ToDo</h1>
+    <form th:action="@{/todos/create/users/{owner_id}(owner_id=${todo.owner.id})}" th:object="${todo}" method="post">
+        <div>
+            <label for="title">Title:</label>
+            <input class="input" type="text" id="title" name="title" th:value="*{title}" required/>
+            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error">Title Error</div>
+
+            <label for="owner">Owner:</label>
+            <span th:text="${todo.owner.firstName} + ' ' + ${todo.owner.lastName}"></span>
+            <input class="input" type="text" id="owner" name="owner" th:value="${todo.owner.id}" readonly/>
+
+            <div class="tooltip">Tasks:
+                <select id="tasks" name="taskIds" multiple="multiple" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <option th:each="task : ${tasks}"
+                            th:value="${task}"
+                            th:text="${task.name} + ' Priority: ' + ${task.priority}"
+                            th:selected="${todo.tasks.contains(task)}">
+                    </option>
+                </select>
+                <span class="tooltiptext" id="tooltip">Hold Ctrl to select multiple</span>
+            </div>
+            <div class="tooltip">Collaborators:
+                <select id="collaborators" name="collaboratorIds" multiple="multiple" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+                    <option th:each="user : ${allUsers}"
+                            th:value="${user.id}"
+                            th:text="${user.firstName + ' ' + user.lastName}"
+                            th:selected="${todo.collaborators.contains(user)}">
+                    </option>
+
+                </select>
+                <span class="tooltiptext" id="tooltip2">Hold Ctrl to select multiple</span>
+            </div>
+        <div>
+            <input type="submit" value="Create" class="green-btn"/>
+            <a th:href="@{/todos/all/users/{user_id}(user_id=${todo.owner.id})}" class="red-btn">Cancel and Return to
+                Lists</a>
+        </div>
+    </form>
+
+    <!--    <h1 th:text="${todo.title}"></h1>-->
+    <!--    <p><strong>Owner:</strong> <span th:text="${todo.owner.firstName} + ' ' + ${todo.owner.lastName}"></span></p>-->
+    <!--    <p><strong>Created At:</strong> <span th:text="${todo.createdAt}"></span></p>-->
+
+    <!--    <div>-->
+    <!--        <h2>Tasks:</h2>-->
+    <!--        <ul>-->
+    <!--            <li th:each="task : ${todo.tasks}" th:text="${task.description}"></li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+
+    <!--    <div>-->
+    <!--        <h2>Collaborators:</h2>-->
+    <!--        <ul>-->
+    <!--            <li th:each="user : ${todo.collaborators}" th:text="${user.firstName} + ' ' + ${user.lastName}"></li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+</div>
+</body>
+</html>

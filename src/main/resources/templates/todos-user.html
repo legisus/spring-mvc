@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All ToDo lists of User</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/tables.css">
+    <link rel="stylesheet" type="text/css" href="/css/tooltip.css">
+    <link rel="stylesheet" type="text/css" href="/css/user-selector.css">
+
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'All ToDo Lists of ' + ${user.getFirstName()}"></h1>
+    <a href="#" th:href="@{/todos/create/users/{userId}(userId=${user.id})}" class="btn green-btn">Create New ToDo</a>
+    <a href="#" th:href="@{/todos}" class="btn green-btn">All ToDos</a>
+    <table>
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Created At</th>
+            <th>Tasks</th>
+            <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="todo, iterStat : ${todos}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${todo.id}"></td>
+            <td th:text="${todo.title}"></td>
+            <td th:text="${#temporals.format(todo.createdAt, 'dd.MM.yyyy HH:mm')}"></td>
+            <td>
+                <div th:each="task : ${todo.tasks}">
+                    <span th:text="${task.name}"></span> -
+                    <span th:text="${task.priority}"></span>
+                </div>
+            </td>
+            <td>
+                <a th:href="@{/todos/{todo_id}/update/users/{ownerId}(todo_id=${todo.id}, ownerId=${user_id})}"
+                   class="btn green-btn">Edit</a>
+                <div th:each="collaborator : ${todo.collaborators}" class="collaborator-buttons">
+                    <a th:href="@{/todos/{id}/remove(id=${todo.id}, collaboratorId=${collaborator.id})}"
+                       class="btn red-btn"
+                       th:text="'Remove ' + ${collaborator.firstName} + ' ' + ${collaborator.lastName}">Remove Collaborator</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

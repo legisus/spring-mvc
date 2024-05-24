@@ -1,0 +1,26 @@
+.select-user {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    max-height: 150px; /* Set a maximum height */
+    overflow-y: auto; /* Enables scrolling if content exceeds the max height */
+}
+
+/* Style the scrollbar track */
+.select-user::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #f1f1f1;
+}
+
+/* Style the scrollbar handle */
+.select-user::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Style the scrollbar handle on hover */
+.select-user::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/tables.css">
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>List of ToDo's</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ToDo ID</th>
+            <th>ToDo Title</th>
+            <th>Created At</th>
+            <th>Owner</th>
+            <th>Tasks</th>
+            <th>Collaborators</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="todo : ${todos}">
+            <td th:text="${todo.id}"></td>
+            <td th:text="${todo.title}"></td>
+            <td th:text="${todo.createdAt}"></td>
+            <td th:text="${todo.owner.firstName} + ' ' + ${todo.owner.lastName}"></td>
+            <td>
+                <ul>
+                    <li th:each="task : ${todo.tasks}" th:text="${task.getName()}"></li>
+                </ul>
+            <td>
+                <ul>
+                    <li th:each="collaborator : ${todo.collaborators}" th:text="${collaborator.firstName} + ' ' + ${collaborator.lastName}"></li>
+                </ul>
+            <td>
+            <a th:href="@{/todos/all/users/{idOwner}(idOwner=${todo.owner.id})}" class="green-btn">Look</a>
+            <a th:href="@{/todos/{id}/update/users/{idOwner}(id=${todo.id}, idOwner=${todo.owner.id})}" class="green-btn">Edit</a>
+            <a th:href="@{/todos/{id}/delete/users/{idOwner}(id=${todo.id}, idOwner=${todo.owner.id})}" class="red-btn">Delete</a>
+
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+
+</html>
